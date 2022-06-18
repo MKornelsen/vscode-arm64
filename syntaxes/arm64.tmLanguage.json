@@ -1,0 +1,104 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ARM64",
+	"patterns": [
+		{
+			"name": "comment.arm64",
+			"match": "//.*$"
+		},
+		{
+			"name": "comment.block.arm64",
+			"begin": "/\\*",
+			"end": "\\*/"
+		},
+		{
+			"name": "keyword.control.directive.arm64",
+			"match": "^\\s*\\.\\w+\\b(.*)",
+			"captures": {
+				"1": {
+					"name": "variable.parameter.arm64"
+				}
+			}
+		},
+		{
+			"name": "storage.register.arm64",
+			"match": "\\b([xw]([0-9]|[12][0-9]|30|zr)|sp)\\b"
+		},
+		{
+			"name": "storage.floatregister.arm64",
+			"match": "\\b[bhsd]([0-9]|[12][0-9]|3[0-1])\\b"
+		},
+		{
+			"name": "storage.vectorregister.arm64",
+			"match": "\\b(q([0-9]|[12][0-9]|3[0-1])|v([0-9]|[12][0-9]|3[0-1])\\.([bhsd]|16b|8[bh]|4[hs]|2[sd]))\\b"
+		},
+		{
+			"name": "variable.name.labels.arm64",
+			"match": "^\\s*.*:"
+		},
+		{
+			"name": "support.function.bl.arm64",
+			"match": "\\s*(b(?:l|eq|ne|cs|hs|cc|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)?)\\s+(.*)\\b",
+			"captures": {
+				"1": {
+					"name": "support.function.branch.arm64"
+				},
+				"2": {
+					"name": "variable.parameter.branchtarget.arm64"
+				}
+			}
+		},
+		{
+			"name": "constant.other.equalsignliteral.arm64",
+			"match": "=.*"
+		},
+		{
+			"name": "variable.parameter.conditioncode.arm64",
+			"match": "\\b(eq|ne|cs|hs|cc|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)\\b"
+		},
+		{
+			"name": "support.function.instruction.arm64",
+			"match": "\\b[a-zA-Z0-9]+\\b"
+		},
+		{
+			"include": "#numerics"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"numerics": {
+			"patterns": [
+				{
+					"name": "constant.numeric.dec.arm64",
+					"match": "#?-?[0-9]+\\b"
+				},
+				{
+					"name": "constant.numeric.hex.arm64",
+					"match": "#-?0x[0-9a-fA-F]+\\b"
+				},
+				{
+					"name": "constant.character.arm64",
+					"match": "#?\\'.\\'"
+				},
+				{
+					"name": "constant.other.arm64",
+					"match": "#\\(.*\\)"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.arm64",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.arm64",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.arm64"
+}

@@ -1,0 +1,66 @@
+{
+    "name": "arm64",
+    "displayName": "ARM64",
+    "description": "Supporting ARM64 (GAS syntax) assembly in vscode",
+    "version": "1.0.0",
+    "engines": {
+        "vscode": "^1.68.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "activationEvents": [
+        "onLanguage:arm64"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "arm64",
+                "aliases": [
+                    "ARM64",
+                    "arm64"
+                ],
+                "extensions": [
+                    ".s",
+                    ".S",
+                    ".asm"
+                ],
+                "configuration": "./language-configuration.json",
+                "icon": {
+                    "dark": "./icons/arm-icon.png",
+                    "light": "./icons/arm-icon.png"
+                }
+            }
+        ],
+        "grammars": [
+            {
+                "language": "arm64",
+                "scopeName": "source.arm64",
+                "path": "./syntaxes/arm64.tmLanguage.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "arm64.helloWorld",
+                "title": "ARM64 Hello World"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -b",
+        "watch": "tsc -b -w",
+        "lint": "eslint ./src --ext .ts,.tsx"
+    },
+    "devDependencies": {
+        "@types/mocha": "^9.1.0",
+        "@types/node": "^16.11.7",
+        "@types/vscode": "^1.68.0",
+        "@typescript-eslint/eslint-plugin": "^5.19.0",
+        "@typescript-eslint/parser": "^5.19.0",
+        "eslint": "^8.13.0",
+        "mocha": "^9.2.1",
+        "typescript": "^4.7.2"
+    }
+}
