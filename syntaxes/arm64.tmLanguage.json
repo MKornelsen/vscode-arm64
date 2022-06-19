@@ -16,7 +16,12 @@
 			"match": "^\\s*\\.\\w+\\b(.*)",
 			"captures": {
 				"1": {
-					"name": "variable.parameter.arm64"
+					"patterns": [
+						{
+							"include": "#strings"
+						}
+					],
+					"name": "variable.parameter.directive.arm64"
 				}
 			}
 		},
