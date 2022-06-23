@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs')
+const https = require('https');
 
 let basedata = fs.readFileSync('BaseInstructions.b64', 'utf8');
 let simddata = fs.readFileSync('SimdInstructions.b64', 'utf8');
@@ -22,13 +23,52 @@ lines = lines.filter(line => {
 
 const regexp = new RegExp('.*<a href=\"(\\S*)\".*>(.*)</a>: (.*).</span>.*');
 
-console.log(lines[0])
-let matches = lines[0].match(regexp)
-console.log(matches)
+// console.log(lines[100]);
+let matches = lines[100].match(regexp);
+console.log(matches);
+console.log(matches[1]);
+
+const testPromise = new Promise(resolve => {
+    let req = https.get('https://documentation-service.arm.com' + matches[1], res => {
+        console.log(res.statusCode);
+        console.log(res.headers);
+
+        let fulldata = '';
+        res.on('data', data => {
+            // console.log(data.toString());
+            fulldata = fulldata + data.toString();
+        });
+
+        res.on('end', () => {
+            let parsed = JSON.parse(fulldata);
+            let decoded = Buffer.from(parsed.content, 'base64').toString('ascii');
+            fs.writeFileSync('exampledetail.html', decoded);
+        });
+    });
+
+});
+
+const promises = [];
 
 let instructions = [];
 lines.forEach(line => {
     let match = line.match(regexp);
+    let req = https.get('https://documentation-service.arm.com' + match[1], res => {
+        console.log(match[2] + ': ' + res.statusCode);
+        // console.log(res.headers);
+
+        let fulldata = '';
+        res.on('data', data => {
+            // console.log(data.toString());
+            fulldata = fulldata + data.toString();
+        });
+
+        res.on('end', () => {
+            let parsed = JSON.parse(fulldata);
+            let decoded = Buffer.from(parsed.content, 'base64').toString('ascii');
+            // console.log(decoded);
+        });
+    });
     instructions.push({
         documentation: 'https://developer.arm.com' + match[1],
         instruction: match[2],
