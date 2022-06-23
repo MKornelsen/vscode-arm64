@@ -23,6 +23,30 @@ const conditioncodes = [
     'al'
 ];
 
+function fetchInstructionList(): InstructionData[] {
+    let data = fs.readFileSync(path.resolve(__dirname, 'InstructionData.json'));
+    return JSON.parse(data.toString());
+}
+
+const instructions = fetchInstructionList();
+
+const instructionMap = new Map<string, InstructionData[]>();
+instructions.forEach(inst => {
+    let key = inst.key.toLowerCase();
+    if (!instructionMap.has(key)) {
+        instructionMap.set(key, []);
+    }
+    instructionMap.get(key).push(inst);
+});
+
+conditioncodes.forEach(cc => {
+    // console.log(`b${cc}`);
+    instructionMap.set('b' + cc, instructionMap.get('b.cond'));
+    instructionMap.set('bc' + cc, instructionMap.get('bc.cond'));
+});
+
+const instructionCompletions = new vscode.CompletionList();
+
 export function activate(context: vscode.ExtensionContext) {
     console.log('ARM64 extension activated');
 
@@ -32,26 +56,10 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(helloWorldCommand);
 
-    const instructions = fetchInstructionList();
-    let instructionMap = new Map<string, InstructionData[]>();
-    instructions.forEach(inst => {
-        let key = inst.key.toLowerCase();
-        if (!instructionMap.has(key)) {
-            instructionMap.set(key, []);
-        }
-        instructionMap.get(key).push(inst);
-    });
-    
-    conditioncodes.forEach(cc => {
-        // console.log(`b${cc}`);
-        instructionMap.set('b' + cc, instructionMap.get('b.cond'));
-        instructionMap.set('bc' + cc, instructionMap.get('bc.cond'));
-    });
-
     console.log(instructionMap.get('bne'));
 
     vscode.languages.registerHoverProvider('arm64', {
-        provideHover(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken) {
+        provideHover(document, position, token) {
             // console.log(position.line);
             let line = document.lineAt(position.line);
 
@@ -74,6 +82,26 @@ export function activate(context: vscode.ExtensionContext) {
             };
         }
     });
+
+    vscode.languages.registerCompletionItemProvider('arm64', {
+        provideCompletionItems(document, position, token, context) {
+            console.log('triggered completion');
+            let line = document.lineAt(position.line);
+
+            let currentChar = line.text.charAt(position.character);
+            let result = new vscode.CompletionList();
+            for (let i = 0; i < 10; i++) {
+                result.items.push(new vscode.CompletionItem(`Completion ${i}`));
+            }
+            
+            return result;
+        },
+
+        resolveCompletionItem(item, token) {
+            item.detail = item.label + ' detail'
+            return item;
+        }
+    });
 }
 
 interface InstructionData {
@@ -81,9 +109,4 @@ interface InstructionData {
     documentation: string;
     key: string;
     description: string;
-}
-
-function fetchInstructionList(): InstructionData[] {
-    let data = fs.readFileSync(path.resolve(__dirname, 'InstructionData.json'));
-    return JSON.parse(data.toString());
 }

@@ -2,7 +2,7 @@
     "name": "vscode-arm64",
     "displayName": "ARM64 Assembly",
     "description": "Supporting ARM64 (GAS syntax) assembly in vscode",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "author": {
         "name": "Murray Kornelsen",
         "email": "murray.kornelsen@mail.mcgill.ca"
@@ -17,7 +17,8 @@
         "vscode": "^1.68.0"
     },
     "categories": [
-        "Programming Languages"
+        "Programming Languages",
+        "Snippets"
     ],
     "activationEvents": [
         "onLanguage:arm64"
@@ -29,7 +30,8 @@
                 "id": "arm64",
                 "aliases": [
                     "ARM64",
-                    "arm64"
+                    "arm64",
+                    "aarch64"
                 ],
                 "extensions": [
                     ".s",
@@ -48,6 +50,12 @@
                 "language": "arm64",
                 "scopeName": "source.arm64",
                 "path": "./syntaxes/arm64.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "arm64",
+                "path": "./snippets/basic.json"
             }
         ],
         "commands": [

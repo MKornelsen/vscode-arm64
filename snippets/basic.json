@@ -1,0 +1,28 @@
+{
+    "ARM64HelloWorld": {
+        "prefix": "HelloWorld",
+        "body": [
+            ".text",
+            "",
+            ".global _start",
+            "_start:",
+            "   mov x0, #1",
+            "   ldr x1, =HELLOWORLD",
+            "   ldr x2, =LENGTH",
+            "   mov x8, #64",
+            "   svc #0",
+            "",
+            "   mov x0, #0",
+            "   mov x8, #93",
+            "   svc #0",
+            "",
+            ".data",
+            "",
+            "HELLOWORLD:",
+            "   .asciz \"Hello ARM64!\\n\"",
+            "LENGTH = .-HELLOWORLD",
+            ""
+        ],
+        "description": "Simple Hello World for ARM64 Linux"
+    }
+}
