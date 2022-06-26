@@ -83,6 +83,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
+    /*
     vscode.languages.registerCompletionItemProvider('arm64', {
         provideCompletionItems(document, position, token, context) {
             console.log('triggered completion');
@@ -102,6 +103,7 @@ export function activate(context: vscode.ExtensionContext) {
             return item;
         }
     });
+    */
 }
 
 interface InstructionData {

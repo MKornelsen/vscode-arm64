@@ -4,3 +4,5 @@
 vsc-extension-quickstart.md
 *.b64
 generateInstructionJson.js
+InstructionDetail.json
+exampledetail.html

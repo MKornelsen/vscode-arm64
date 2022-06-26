@@ -1,13 +1,8 @@
 <html>
  <head></head> 
  <body> 
-  <h2>CRC32CB, CRC32CH, CRC32CW, CRC32CX</h2> 
-  <p><span>CRC32</span> checksum performs a cyclic redundancy check (CRC) calculation on a value held in a general-purpose register. It takes an input CRC value in the first source operand, performs a CRC on the input value in the second source operand, and returns the output CRC value. The second source operand can be 8, 16, 32, or 64 bits. To align with common usage, the bit order of the values is reversed as part of the operation, and the polynomial 0x1EDC6F41 is used for the CRC calculation.</p> 
-  <p>In an Armv8.0 implementation, this is an <small>optional</small> instruction. From Armv8.1, it is mandatory for all implementations to implement this instruction.</p> 
-  <blockquote title="Note info"> 
-   <h4>Note</h4> 
-   <p><a title="Reference to Armv8 ARM section">ID_AA64ISAR0_EL1</a>.CRC32 indicates whether this instruction is supported.</p> 
-  </blockquote> 
+  <h2>ADD (extended register)</h2> 
+  <p>Add (extended register) adds a register value and a sign or zero-extended register value, followed by an optional left shift amount, and writes the result to the destination register. The argument that is extended from the &lt;Rm&gt; register can be a byte, halfword, word, or doubleword.</p> 
   <p></p> 
   <div> 
    <table> 
@@ -52,32 +47,30 @@
       <td>sf</td> 
       <td>0</td> 
       <td>0</td> 
-      <td>1</td> 
-      <td>1</td> 
       <td>0</td> 
       <td>1</td> 
       <td>0</td> 
       <td>1</td> 
       <td>1</td> 
       <td>0</td> 
+      <td>0</td> 
+      <td>1</td> 
       <td colspan="5">Rm</td> 
-      <td>0</td> 
-      <td>1</td> 
-      <td>0</td> 
-      <td>1</td> 
-      <td colspan="2">sz</td> 
+      <td colspan="3">option</td> 
+      <td colspan="3">imm3</td> 
       <td colspan="5">Rn</td> 
       <td colspan="5">Rd</td> 
      </tr> 
      <tr> 
       <td></td> 
+      <td>op</td> 
+      <td>S</td> 
+      <td colspan="5"></td> 
+      <td colspan="2"></td> 
       <td></td> 
-      <td></td> 
-      <td colspan="8"></td> 
       <td colspan="5"></td> 
       <td colspan="3"></td> 
-      <td>C</td> 
-      <td colspan="2"></td> 
+      <td colspan="3"></td> 
       <td colspan="5"></td> 
       <td colspan="5"></td> 
      </tr> 
@@ -85,33 +78,25 @@
    </table> 
   </div> 
   <div> 
-   <h4>CRC32CB<span> (sf == 0 &amp;&amp; sz == 00)</span></h4> 
-   <a id="CRC32CB_32C_dp_2src"></a> 
-   <p>CRC32CB <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wd" title="32-bit general-purpose accumulator output register (field &quot;Rd&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wd">&lt;Wd&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wn" title="32-bit general-purpose accumulator input register (field &quot;Rn&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wn">&lt;Wn&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wm" title="32-bit general-purpose data source register (field &quot;Rm&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wm">&lt;Wm&gt;</a></p> 
+   <h4>32-bit<span> (sf == 0)</span></h4> 
+   <a id="ADD_32_addsub_ext"></a> 
+   <p>ADD <a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_wd_wsp" title="32-bit destination general-purpose register or WSP (field &quot;Rd&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_wd_wsp">&lt;Wd|WSP&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_wn_wsp" title="First 32-bit source general-purpose register or WSP (field &quot;Rn&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_wn_wsp">&lt;Wn|WSP&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_wm" title="Second 32-bit general-purpose source register (field &quot;Rm&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_wm">&lt;Wm&gt;</a>{, <a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_extend" title="Extension applied to second source operand (field &quot;option&quot;) [LSL,SXTB,SXTH,SXTW,SXTX,UXTB,UXTH,UXTW,UXTX]" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_extend">&lt;extend&gt;</a> {#<a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_amount" title="Left shift amount applied after extension [0-4], default 0 (field &quot;imm3&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_amount">&lt;amount&gt;</a>}}</p> 
   </div> 
   <div> 
-   <h4>CRC32CH<span> (sf == 0 &amp;&amp; sz == 01)</span></h4> 
-   <a id="CRC32CH_32C_dp_2src"></a> 
-   <p>CRC32CH <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wd" title="32-bit general-purpose accumulator output register (field &quot;Rd&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wd">&lt;Wd&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wn" title="32-bit general-purpose accumulator input register (field &quot;Rn&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wn">&lt;Wn&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wm" title="32-bit general-purpose data source register (field &quot;Rm&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wm">&lt;Wm&gt;</a></p> 
+   <h4>64-bit<span> (sf == 1)</span></h4> 
+   <a id="ADD_64_addsub_ext"></a> 
+   <p>ADD <a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_xd_sp" title="64-bit destination general-purpose register or SP (field &quot;Rd&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_xd_sp">&lt;Xd|SP&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_xn_sp" title="First 64-bit source general-purpose register or SP (field &quot;Rn&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_xn_sp">&lt;Xn|SP&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_r" title="Width specifier (field &quot;option&quot;) [W,X]" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_r">&lt;R&gt;</a><a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_m" title="Second general-purpose source register number [0-30] or ZR (31) (field &quot;Rm&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_m">&lt;m&gt;</a>{, <a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_extend_1" title="Extension applied to second source operand (field &quot;option&quot;) [LSL,SXTB,SXTH,SXTW,SXTX,UXTB,UXTH,UXTW,UXTX]" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_extend_1">&lt;extend&gt;</a> {#<a href="/documentation/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_amount" title="Left shift amount applied after extension [0-4], default 0 (field &quot;imm3&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/ADD--extended-register---Add--extended-register--?lang=en#sa_amount">&lt;amount&gt;</a>}}</p> 
   </div> 
-  <div> 
-   <h4>CRC32CW<span> (sf == 0 &amp;&amp; sz == 10)</span></h4> 
-   <a id="CRC32CW_32C_dp_2src"></a> 
-   <p>CRC32CW <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wd" title="32-bit general-purpose accumulator output register (field &quot;Rd&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wd">&lt;Wd&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wn" title="32-bit general-purpose accumulator input register (field &quot;Rn&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wn">&lt;Wn&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wm" title="32-bit general-purpose data source register (field &quot;Rm&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wm">&lt;Wm&gt;</a></p> 
-  </div> 
-  <div> 
-   <h4>CRC32CX<span> (sf == 1 &amp;&amp; sz == 11)</span></h4> 
-   <a id="CRC32CX_64C_dp_2src"></a> 
-   <p>CRC32CX <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wd" title="32-bit general-purpose accumulator output register (field &quot;Rd&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wd">&lt;Wd&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wn" title="32-bit general-purpose accumulator input register (field &quot;Rn&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_wn">&lt;Wn&gt;</a>, <a href="/documentation/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_xm" title="64-bit general-purpose data source register (field &quot;Rm&quot;)" class="document-topic" document-topic-path="/ddi0602/2022-03/Base-Instructions/CRC32CB--CRC32CH--CRC32CW--CRC32CX--CRC32C-checksum-?lang=en#sa_xm">&lt;Xm&gt;</a></p> 
-  </div> 
-  <pre>if !<a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.HaveCRCExt.0" title="function: boolean HaveCRCExt()" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.HaveCRCExt.0">HaveCRCExt</a>() then UNDEFINED;
-integer d = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1" title="function: integer UInt(bits(N) x)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1">UInt</a>(Rd);
+  <pre>integer d = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1" title="function: integer UInt(bits(N) x)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1">UInt</a>(Rd);
 integer n = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1" title="function: integer UInt(bits(N) x)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1">UInt</a>(Rn);
 integer m = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1" title="function: integer UInt(bits(N) x)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1">UInt</a>(Rm);
-if sf == '1' &amp;&amp; sz != '11' then UNDEFINED;
-if sf == '0' &amp;&amp; sz == '11' then UNDEFINED;
-integer size = 8 &lt;&lt; <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1" title="function: integer UInt(bits(N) x)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1">UInt</a>(sz);   // 2-bit size field -&gt; 8, 16, 32, 64
-boolean crc32c = (C == '1');</pre> 
+integer datasize = if sf == '1' then 64 else 32;
+boolean sub_op = (op == '1');
+boolean setflags = (S == '1');
+<a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Instrs?lang=en#ExtendType" title="enumeration ExtendType  {ExtendType_SXTB, ExtendType_SXTH, ExtendType_SXTW, ExtendType_SXTX,
+ ExtendType_UXTB, ExtendType_UXTH, ExtendType_UXTW, ExtendType_UXTX}" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Instrs?lang=en#ExtendType">ExtendType</a> extend_type = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Instrs?lang=en#impl-aarch64.DecodeRegExtend.1" title="function: ExtendType DecodeRegExtend(bits(3) op)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Instrs?lang=en#impl-aarch64.DecodeRegExtend.1">DecodeRegExtend</a>(option);       
+integer shift = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1" title="function: integer UInt(bits(N) x)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.UInt.1">UInt</a>(imm3);
+if shift &gt; 4 then UNDEFINED;</pre> 
   <div></div> 
   <h3>Assembler Symbols</h3> 
   <div> 
@@ -122,8 +107,8 @@ boolean crc32c = (C == '1');</pre>
     </colgroup> 
     <tbody> 
      <tr> 
-      <td>&lt;Wd&gt;</td> 
-      <td><a id="sa_wd"></a> <p>Is the 32-bit name of the general-purpose accumulator output register, encoded in the "Rd" field.</p> </td> 
+      <td>&lt;Wd|WSP&gt;</td> 
+      <td><a id="sa_wd_wsp"></a> <p>Is the 32-bit name of the destination general-purpose register or stack pointer, encoded in the "Rd" field.</p> </td> 
      </tr> 
     </tbody> 
    </table> 
@@ -134,20 +119,8 @@ boolean crc32c = (C == '1');</pre>
     </colgroup> 
     <tbody> 
      <tr> 
-      <td>&lt;Wn&gt;</td> 
-      <td><a id="sa_wn"></a> <p>Is the 32-bit name of the general-purpose accumulator input register, encoded in the "Rn" field.</p> </td> 
-     </tr> 
-    </tbody> 
-   </table> 
-   <table> 
-    <colgroup> 
-     <col> 
-     <col> 
-    </colgroup> 
-    <tbody> 
-     <tr> 
-      <td>&lt;Xm&gt;</td> 
-      <td><a id="sa_xm"></a> <p>Is the 64-bit name of the general-purpose data source register, encoded in the "Rm" field.</p> </td> 
+      <td>&lt;Wn|WSP&gt;</td> 
+      <td><a id="sa_wn_wsp"></a> <p>Is the 32-bit name of the first source general-purpose register or stack pointer, encoded in the "Rn" field.</p> </td> 
      </tr> 
     </tbody> 
    </table> 
@@ -159,7 +132,197 @@ boolean crc32c = (C == '1');</pre>
     <tbody> 
      <tr> 
       <td>&lt;Wm&gt;</td> 
-      <td><a id="sa_wm"></a> <p>Is the 32-bit name of the general-purpose data source register, encoded in the "Rm" field.</p> </td> 
+      <td><a id="sa_wm"></a> <p>Is the 32-bit name of the second general-purpose source register, encoded in the "Rm" field.</p> </td> 
+     </tr> 
+    </tbody> 
+   </table> 
+   <table> 
+    <colgroup> 
+     <col> 
+     <col> 
+    </colgroup> 
+    <tbody> 
+     <tr> 
+      <td>&lt;Xd|SP&gt;</td> 
+      <td><a id="sa_xd_sp"></a> <p>Is the 64-bit name of the destination general-purpose register or stack pointer, encoded in the "Rd" field.</p> </td> 
+     </tr> 
+    </tbody> 
+   </table> 
+   <table> 
+    <colgroup> 
+     <col> 
+     <col> 
+    </colgroup> 
+    <tbody> 
+     <tr> 
+      <td>&lt;Xn|SP&gt;</td> 
+      <td><a id="sa_xn_sp"></a> <p>Is the 64-bit name of the first source general-purpose register or stack pointer, encoded in the "Rn" field.</p> </td> 
+     </tr> 
+    </tbody> 
+   </table> 
+   <table> 
+    <colgroup> 
+     <col> 
+     <col> 
+    </colgroup> 
+    <tbody> 
+     <tr> 
+      <td>&lt;R&gt;</td> 
+      <td><a id="sa_r"></a> <p>Is a width specifier, encoded in <q>option</q>: </p> 
+       <table> 
+        <thead> 
+         <tr> 
+          <th>option</th> 
+          <th>&lt;R&gt;</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr> 
+          <td>00x</td> 
+          <td>W</td> 
+         </tr> 
+         <tr> 
+          <td>010</td> 
+          <td>W</td> 
+         </tr> 
+         <tr> 
+          <td>x11</td> 
+          <td>X</td> 
+         </tr> 
+         <tr> 
+          <td>10x</td> 
+          <td>W</td> 
+         </tr> 
+         <tr> 
+          <td>110</td> 
+          <td>W</td> 
+         </tr> 
+        </tbody> 
+       </table> </td> 
+     </tr> 
+    </tbody> 
+   </table> 
+   <table> 
+    <colgroup> 
+     <col> 
+     <col> 
+    </colgroup> 
+    <tbody> 
+     <tr> 
+      <td>&lt;m&gt;</td> 
+      <td><a id="sa_m"></a> <p>Is the number [0-30] of the second general-purpose source register or the name ZR (31), encoded in the "Rm" field.</p> </td> 
+     </tr> 
+    </tbody> 
+   </table> 
+   <table> 
+    <colgroup> 
+     <col> 
+     <col> 
+    </colgroup> 
+    <tbody> 
+     <tr> 
+      <td>&lt;extend&gt;</td> 
+      <td><a id="sa_extend"></a> <p>For the 32-bit variant: is the extension to be applied to the second source operand, encoded in <q>option</q>: </p> 
+       <table> 
+        <thead> 
+         <tr> 
+          <th>option</th> 
+          <th>&lt;extend&gt;</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr> 
+          <td>000</td> 
+          <td>UXTB</td> 
+         </tr> 
+         <tr> 
+          <td>001</td> 
+          <td>UXTH</td> 
+         </tr> 
+         <tr> 
+          <td>010</td> 
+          <td>LSL|UXTW</td> 
+         </tr> 
+         <tr> 
+          <td>011</td> 
+          <td>UXTX</td> 
+         </tr> 
+         <tr> 
+          <td>100</td> 
+          <td>SXTB</td> 
+         </tr> 
+         <tr> 
+          <td>101</td> 
+          <td>SXTH</td> 
+         </tr> 
+         <tr> 
+          <td>110</td> 
+          <td>SXTW</td> 
+         </tr> 
+         <tr> 
+          <td>111</td> 
+          <td>SXTX</td> 
+         </tr> 
+        </tbody> 
+       </table> If "Rd" or "Rn" is '11111' (WSP) and "option" is '010' then LSL is preferred, but may be omitted when "imm3" is '000'. In all other cases &lt;extend&gt; is required and must be UXTW when "option" is '010'. </td> 
+     </tr> 
+     <tr> 
+      <td></td> 
+      <td><a id="sa_extend_1"></a> <p>For the 64-bit variant: is the extension to be applied to the second source operand, encoded in <q>option</q>: </p> 
+       <table> 
+        <thead> 
+         <tr> 
+          <th>option</th> 
+          <th>&lt;extend&gt;</th> 
+         </tr> 
+        </thead> 
+        <tbody> 
+         <tr> 
+          <td>000</td> 
+          <td>UXTB</td> 
+         </tr> 
+         <tr> 
+          <td>001</td> 
+          <td>UXTH</td> 
+         </tr> 
+         <tr> 
+          <td>010</td> 
+          <td>UXTW</td> 
+         </tr> 
+         <tr> 
+          <td>011</td> 
+          <td>LSL|UXTX</td> 
+         </tr> 
+         <tr> 
+          <td>100</td> 
+          <td>SXTB</td> 
+         </tr> 
+         <tr> 
+          <td>101</td> 
+          <td>SXTH</td> 
+         </tr> 
+         <tr> 
+          <td>110</td> 
+          <td>SXTW</td> 
+         </tr> 
+         <tr> 
+          <td>111</td> 
+          <td>SXTX</td> 
+         </tr> 
+        </tbody> 
+       </table> If "Rd" or "Rn" is '11111' (SP) and "option" is '011' then LSL is preferred, but may be omitted when "imm3" is '000'. In all other cases &lt;extend&gt; is required and must be UXTX when "option" is '011'. </td> 
+     </tr> 
+    </tbody> 
+   </table> 
+   <table> 
+    <colgroup> 
+     <col> 
+     <col> 
+    </colgroup> 
+    <tbody> 
+     <tr> 
+      <td>&lt;amount&gt;</td> 
+      <td><a id="sa_amount"></a> <p>Is the left shift amount to be applied after extension in the range 0 to 4, defaulting to 0, encoded in the "imm3" field. It must be absent when &lt;extend&gt; is absent, is required when &lt;extend&gt; is LSL, and is optional when &lt;extend&gt; is present but not LSL.</p> </td> 
      </tr> 
     </tbody> 
    </table> 
@@ -168,15 +331,27 @@ boolean crc32c = (C == '1');</pre>
   <div> 
    <a id="execute"></a> 
    <h3>Operation</h3> 
-   <pre>bits(32)      acc     = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.read.1" title="accessor: bits(width) X[integer n]" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.read.1">X</a>[n];   // accumulator
-bits(size)    val     = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.read.1" title="accessor: bits(width) X[integer n]" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.read.1">X</a>[m];   // input value
-bits(32)      poly    = (if crc32c then 0x1EDC6F41 else 0x04C11DB7)&lt;31:0&gt;;
+   <pre>bits(datasize) result;
+bits(datasize) operand1 = if n == 31 then <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.SP.read.0" title="accessor: bits(width) SP[]" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.SP.read.0">SP</a>[] else <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.read.1" title="accessor: bits(width) X[integer n]" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.read.1">X</a>[n];
+bits(datasize) operand2 = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Instrs?lang=en#impl-aarch64.ExtendReg.3" title="function: bits(N) ExtendReg(integer reg, ExtendType exttype, integer shift)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Instrs?lang=en#impl-aarch64.ExtendReg.3">ExtendReg</a>(m, extend_type, shift);
+bits(4) nzcv;
+bit carry_in;
 
-bits(32+size) tempacc = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.BitReverse.1" title="function: bits(N) BitReverse(bits(N) data)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.BitReverse.1">BitReverse</a>(acc) : <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.Zeros.1" title="function: bits(N) Zeros(integer N)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.Zeros.1">Zeros</a>(size);
-bits(size+32) tempval = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.BitReverse.1" title="function: bits(N) BitReverse(bits(N) data)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.BitReverse.1">BitReverse</a>(val) : <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.Zeros.1" title="function: bits(N) Zeros(integer N)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.Zeros.1">Zeros</a>(32);
+if sub_op then
+    operand2 = NOT(operand2);
+    carry_in = '1';
+else
+    carry_in = '0';
 
-// Poly32Mod2 on a bitstring does a polynomial Modulus over {0,1} operation
-<a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.write.1" title="accessor: X[integer n] = bits(width) value" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.write.1">X</a>[d] = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.BitReverse.1" title="function: bits(N) BitReverse(bits(N) data)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.BitReverse.1">BitReverse</a>(<a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.Poly32Mod2.2" title="function: bits(32) Poly32Mod2(bits(N) data_in, bits(32) poly)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.Poly32Mod2.2">Poly32Mod2</a>(tempacc EOR tempval, poly));</pre> 
+(result, nzcv) = <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.AddWithCarry.3" title="function: (bits(N), bits(4)) AddWithCarry(bits(N) x, bits(N) y, bit carry_in)" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/Shared-Functions?lang=en#impl-shared.AddWithCarry.3">AddWithCarry</a>(operand1, operand2, carry_in);
+
+if setflags then
+    PSTATE.&lt;N,Z,C,V&gt; = nzcv;
+
+if d == 31 &amp;&amp; !setflags then
+    <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.SP.write.0" title="accessor: SP[] = bits(width) value" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.SP.write.0">SP</a>[] = result;
+else
+    <a href="/documentation/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.write.1" title="accessor: X[integer n] = bits(width) value" class="document-topic" document-topic-path="/ddi0602/2022-03/Shared-Pseudocode/AArch64-Functions?lang=en#impl-aarch64.X.write.1">X</a>[d] = result;</pre> 
   </div> 
   <h3>Operational information</h3> 
   <p>If PSTATE.DIT is 1:</p> 
