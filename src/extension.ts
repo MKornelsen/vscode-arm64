@@ -3,6 +3,13 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 
+interface InstructionData {
+    instruction: string;
+    documentation: string;
+    key: string;
+    description: string;
+}
+
 const conditioncodes = [
     'eq',
     'ne',
@@ -51,10 +58,49 @@ export function activate(context: vscode.ExtensionContext) {
     console.log('ARM64 extension activated');
 
     const helloWorldCommand = vscode.commands.registerCommand('arm64.helloWorld', () => {
+        vscode.window.showInputBox({
+            prompt: "What is your name?",
+            title: "ARM64 HelloWorld"
+        }).then((helloName) => {
+            let message: string = '';
+            if (helloName === undefined) {
+                message = 'Hello from ARM64';
+            } else {
+                message = `${helloName}: Hello from ARM64`;
+            }
+            vscode.window.showInformationMessage(message);
+        });
         vscode.window.showInformationMessage('Hello ARM64');
     });
 
+    const androidRunCommmand = vscode.commands.registerCommand('arm64.androidrun', () => {
+        const conf = vscode.workspace.getConfiguration('vscode-arm64');
+        const adbpath = conf.adbpath;
+        vscode.window.showInformationMessage(`Using adb: ${adbpath}`);
+
+        vscode.window.showInputBox({
+            prompt: "Executable name"
+        }).then((name) => {
+            if (name === undefined) {
+                return;
+            }
+            let term = vscode.window.createTerminal("Android Run");
+            term.show();
+            term.sendText('dir');
+        });
+        // vscode.window.showQuickPick()
+    });
+
+    const clangCompileCommand = vscode.commands.registerCommand('arm64.clangcompile', () => {
+        const conf = vscode.workspace.getConfiguration('vscode-arm64');
+        const clangpath = conf.clangpath;
+        const linkerpath = conf.linkerpath;
+        vscode.window.showInformationMessage(`Using clang: ${clangpath}, linker: ${linkerpath}`);
+    });
+
     context.subscriptions.push(helloWorldCommand);
+    context.subscriptions.push(androidRunCommmand);
+    context.subscriptions.push(clangCompileCommand);
 
     console.log(instructionMap.get('bne'));
 
@@ -65,11 +111,11 @@ export function activate(context: vscode.ExtensionContext) {
 
             let regexp = new RegExp('\\s*(\\w+)')
             let instruction = line.text.match(regexp)[1].toLowerCase()
-            
+
             let docdata = instructionMap.get(instruction);
 
             let result = [];
-            
+
             docdata.forEach(inst => {
                 let markdownresult = new vscode.MarkdownString();
                 markdownresult.appendMarkdown(`#### [${inst.instruction}](${inst.documentation})\n`);
@@ -104,11 +150,4 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
     */
-}
-
-interface InstructionData {
-    instruction: string;
-    documentation: string;
-    key: string;
-    description: string;
 }

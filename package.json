@@ -58,10 +58,41 @@
                 "path": "./snippets/basic.json"
             }
         ],
+        "configuration": {
+            "title": "VSCode ARM64",
+            "properties": {
+                "vscode-arm64.adbpath": {
+                    "title": "ADB Path",
+                    "type": "string",
+                    "default": "",
+                    "description": "adb executable used by 'Run on Android' command. Can be 'adb' if on system path or full path to adb otherwise."
+                },
+                "vscode-arm64.clangpath": {
+                    "title": "Clang Path",
+                    "type": "string",
+                    "default": "",
+                    "description": "clang compiler used by 'Assemble with clang' command. For example, 'aarch64-linux-android31-clang' or full path if not on system path."
+                },
+                "vscode-arm64.linkerpath": {
+                    "title": "Linker Path",
+                    "type": "string",
+                    "default": "",
+                    "description": "linker used by 'Assemble with clang' command"
+                }
+            }
+        },
         "commands": [
             {
                 "command": "arm64.helloWorld",
                 "title": "ARM64 Hello World"
+            },
+            {
+                "command": "arm64.androidrun",
+                "title": "ARM64 Run on Android"
+            },
+            {
+                "command": "arm64.clangcompile",
+                "title": "ARM64 Assemble with clang"
             }
         ]
     },
