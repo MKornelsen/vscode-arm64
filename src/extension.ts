@@ -43,13 +43,19 @@ instructions.forEach(inst => {
     if (!instructionMap.has(key)) {
         instructionMap.set(key, []);
     }
-    instructionMap.get(key).push(inst);
+    instructionMap.get(key)?.push(inst);
 });
 
 conditioncodes.forEach(cc => {
     // console.log(`b${cc}`);
-    instructionMap.set('b' + cc, instructionMap.get('b.cond'));
-    instructionMap.set('bc' + cc, instructionMap.get('bc.cond'));
+    const bcond = instructionMap.get('b.cond');
+    const bccond = instructionMap.get('bc.cond');
+    if (bcond === undefined || bccond === undefined) {
+        console.log('b or bc instruction not found')
+        return;
+    }
+    instructionMap.set('b' + cc, bcond);
+    instructionMap.set('bc' + cc, bccond);
 });
 
 const instructionCompletions = new vscode.CompletionList();
@@ -109,12 +115,19 @@ export function activate(context: vscode.ExtensionContext) {
             // console.log(position.line);
             let line = document.lineAt(position.line);
 
-            let regexp = new RegExp('\\s*(\\w+)')
-            let instruction = line.text.match(regexp)[1].toLowerCase()
+            let regexp = new RegExp('\\s*(\\w+)');
+            let match = line.text.match(regexp)
+            if (match === null) {
+                return;
+            }
+            let instruction = match[1].toLowerCase();
 
             let docdata = instructionMap.get(instruction);
-
-            let result = [];
+            if (docdata === undefined) {
+                return;
+            }
+            
+            let result: vscode.MarkdownString[] = [];
 
             docdata.forEach(inst => {
                 let markdownresult = new vscode.MarkdownString();

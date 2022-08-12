@@ -21,7 +21,10 @@
         "Snippets"
     ],
     "activationEvents": [
-        "onLanguage:arm64"
+        "onLanguage:arm64",
+        "onCommand:arm64.helloWorld",
+        "onCommand:arm64.androidrun",
+        "onCommand:arm64.clangcompile"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -98,18 +101,21 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "compile": "tsc -b",
-        "watch": "tsc -b -w",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
         "lint": "eslint ./src --ext .ts,.tsx"
     },
     "devDependencies": {
-        "@types/mocha": "^9.1.0",
-        "@types/node": "^16.11.7",
         "@types/vscode": "^1.68.0",
-        "@typescript-eslint/eslint-plugin": "^5.19.0",
-        "@typescript-eslint/parser": "^5.19.0",
-        "eslint": "^8.13.0",
+        "@types/glob": "^7.2.0",
+        "@types/mocha": "^9.1.1",
+        "@types/node": "16.x",
+        "@typescript-eslint/eslint-plugin": "^5.31.0",
+        "@typescript-eslint/parser": "^5.31.0",
+        "eslint": "^8.20.0",
+        "glob": "^8.0.3",
         "mocha": "^9.2.1",
-        "typescript": "^4.7.2"
+        "typescript": "^4.7.2",
+        "@vscode/test-electron": "^2.1.5"
     }
 }
