@@ -85,7 +85,7 @@
 				},
 				{
 					"name": "constant.character.arm64",
-					"match": "#?\\'.\\'"
+					"match": "#?\\'\\\\?.\\'"
 				},
 				{
 					"name": "constant.other.arm64",
