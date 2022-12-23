@@ -27,7 +27,7 @@
 		},
 		{
 			"name": "storage.register.arm64",
-			"match": "\\b([xw]([0-9]|[12][0-9]|30|zr)|sp)\\b"
+			"match": "\\b([xw]([0-9]|[12][0-9]|30|zr)|sp|lr)\\b"
 		},
 		{
 			"name": "storage.floatregister.arm64",
@@ -85,7 +85,7 @@
 				},
 				{
 					"name": "constant.character.arm64",
-					"match": "#?\\'.\\'"
+					"match": "#?\\'\\\\?.\\'"
 				},
 				{
 					"name": "constant.other.arm64",
