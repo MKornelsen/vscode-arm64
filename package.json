@@ -1,8 +1,8 @@
 {
     "name": "vscode-arm64",
-    "displayName": "ARM64 Assembly",
+    "displayName": "Assembly for ARM64",
     "description": "Supporting ARM64 (GAS syntax) assembly in vscode",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "author": {
         "name": "Murray Kornelsen",
         "email": "murray.kornelsen@mail.mcgill.ca"
@@ -12,7 +12,7 @@
         "type": "git",
         "url": "https://github.com/MKornelsen/vscode-arm64.git"
     },
-    "icon": "icons/arm-icon.png",
+    "icon": "icons/mk-icon.png",
     "engines": {
         "vscode": "^1.68.0"
     },
@@ -43,8 +43,8 @@
                 ],
                 "configuration": "./language-configuration.json",
                 "icon": {
-                    "dark": "./icons/arm-icon.png",
-                    "light": "./icons/arm-icon.png"
+                    "dark": "./icons/mk-icon.png",
+                    "light": "./icons/mk-icon.png"
                 }
             }
         ],
