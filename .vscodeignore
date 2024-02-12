@@ -6,3 +6,7 @@ vsc-extension-quickstart.md
 generateInstructionJson.js
 InstructionDetail.json
 exampledetail.html
+InstructionLists.js
+InstructionList.json
+InstructionListDetail.json
+out.txt

@@ -27,23 +27,23 @@
 		},
 		{
 			"name": "storage.register.arm64",
-			"match": "\\b([xw]([0-9]|[12][0-9]|30|zr)|sp|lr)\\b"
+			"match": "(?i)\\b([xw]([0-9]|[12][0-9]|30|zr)|sp|lr|fp)\\b"
 		},
 		{
 			"name": "storage.floatregister.arm64",
-			"match": "\\b[bhsd]([0-9]|[12][0-9]|3[0-1])\\b"
+			"match": "(?i)\\b[bhsd]([0-9]|[12][0-9]|3[0-1])\\b"
 		},
 		{
 			"name": "storage.vectorregister.arm64",
-			"match": "\\b(q([0-9]|[12][0-9]|3[0-1])|v([0-9]|[12][0-9]|3[0-1])\\.([bhsd]|16b|8[bh]|4[hs]|2[sd]))\\b"
+			"match": "(?i)\\b(q([0-9]|[12][0-9]|3[0-1])|v([0-9]|[12][0-9]|3[0-1])\\.([bhsd]|16b|8[bh]|4[hs]|2[sd]))\\b"
 		},
 		{
 			"name": "variable.name.labels.arm64",
-			"match": "^\\s*.*:"
+			"match": "^\\s*\\S+\\s*:"
 		},
 		{
 			"name": "support.function.bl.arm64",
-			"match": "\\s*(b(?:l|eq|ne|cs|hs|cc|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)?)\\s+(.*)\\b",
+			"match": "\\s*(b(?:l|eq|ne|cs|hs|cc|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)?)\\s+(\\S+)\\b",
 			"captures": {
 				"1": {
 					"name": "support.function.branch.arm64"
