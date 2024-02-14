@@ -22,3 +22,7 @@ Might add some sort of completion.
 ### 1.0.0
 
 Initial release of ARM64.
+
+### 1.1.0
+
+Restructure src and fixed a few regex issues.

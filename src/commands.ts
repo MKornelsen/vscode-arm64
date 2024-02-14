@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 
-
 import * as path from 'path';
 import { exec } from 'child_process';
 
@@ -114,7 +113,7 @@ export function activateCommands(context: vscode.ExtensionContext) {
                 const cmdseq = [];
     
                 files.forEach((fn) => {
-                    const command = `${clangpath} -x assembler -target aarch64-linux-android -c ${fn} -o ${fn}.o`;
+                    const command = `${clangpath} -x assembler -c ${fn} -o ${fn}.o`;
                     cmdseq.push(command);
                 });
     

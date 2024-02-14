@@ -51,4 +51,4 @@ helloWorldStr:
     .asciz "Hello World!\n"
 helloWorldStrLen = . - helloWorldStr
 
- $stringWith_Weird_Name : .asciz "This string has a very strange label\n"
+ $stringWith_Weird_Name : .asciz "This string: has a very strange label\n"
