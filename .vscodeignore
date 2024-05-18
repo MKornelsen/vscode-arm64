@@ -3,10 +3,8 @@
 .gitignore
 vsc-extension-quickstart.md
 *.b64
-generateInstructionJson.js
-InstructionDetail.json
 exampledetail.html
 InstructionLists.js
-InstructionList.json
-InstructionListDetail.json
 out.txt
+eslint.config.js
+*.code-workspace

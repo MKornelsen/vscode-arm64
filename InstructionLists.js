@@ -6,9 +6,9 @@ const https = require('https');
 const websiteUrl = 'https://developer.arm.com';
 const apiUrl = 'https://documentation-service.arm.com';
 
-const baseInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2023-12/Base-Instructions?lang=en&baseUrl=/documentation';
-const simdInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2023-12/SIMD-FP-Instructions?lang=en&baseUrl=/documentation';
-const sveInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2023-12/SVE-Instructions?lang=en&baseUrl=/documentation';
+const baseInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2024-03/Base-Instructions?lang=en&baseUrl=/documentation';
+const simdInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2024-03/SIMD-FP-Instructions?lang=en&baseUrl=/documentation';
+const sveInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2024-03/SVE-Instructions?lang=en&baseUrl=/documentation';
 
 async function loadInstructionList(url) {
 
