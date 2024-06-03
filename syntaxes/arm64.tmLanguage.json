@@ -1,5 +1,6 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "source.arm64",
 	"name": "ARM64",
 	"patterns": [
 		{
@@ -62,14 +63,14 @@
 			"match": "\\b(eq|ne|cs|hs|cc|lo|mi|pl|vs|vc|hi|ls|ge|lt|gt|le|al)\\b"
 		},
 		{
-			"name": "support.function.instruction.arm64",
-			"match": "\\b[a-zA-Z0-9]+\\b"
-		},
-		{
 			"include": "#numerics"
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"name": "support.function.instruction.arm64",
+			"match": "\\b[a-zA-Z0-9]+\\b"
 		}
 	],
 	"repository": {
@@ -81,7 +82,11 @@
 				},
 				{
 					"name": "constant.numeric.hex.arm64",
-					"match": "#-?0x[0-9a-fA-F]+\\b"
+					"match": "#?-?0x[0-9a-fA-F]+\\b"
+				},
+				{
+					"name": "constant.numeric.binary.arm64",
+					"match": "#?-?0b[01]+\\b"
 				},
 				{
 					"name": "constant.character.arm64",
@@ -104,6 +109,5 @@
 				}
 			]
 		}
-	},
-	"scopeName": "source.arm64"
+	}
 }

@@ -26,3 +26,7 @@ Initial release of ARM64.
 ### 1.1.0
 
 Restructure src and fixed a few regex issues.
+
+### 1.1.2
+
+Support binary literals like "0b101010110" or "#0b1010101010"
