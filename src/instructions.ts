@@ -3,6 +3,7 @@ export interface InstructionData {
     documentation: string;
     key: string;
     description: string;
+    sve?: true;
 }
 
 export interface InstructionDetail {

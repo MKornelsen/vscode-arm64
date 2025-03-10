@@ -6,9 +6,9 @@ const https = require('https');
 const websiteUrl = 'https://developer.arm.com';
 const apiUrl = 'https://documentation-service.arm.com';
 
-const baseInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2024-03/Base-Instructions?lang=en&baseUrl=/documentation';
-const simdInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2024-03/SIMD-FP-Instructions?lang=en&baseUrl=/documentation';
-const sveInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2024-03/SVE-Instructions?lang=en&baseUrl=/documentation';
+const baseInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2024-09/Base-Instructions?lang=en&baseUrl=/documentation';
+const simdInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2024-09/SIMD-FP-Instructions?lang=en&baseUrl=/documentation';
+const sveInstructionsUrl = 'https://documentation-service.arm.com/documentation/ddi0602/2024-09/SVE-Instructions?lang=en&baseUrl=/documentation';
 
 async function loadInstructionList(url) {
 
@@ -109,25 +109,34 @@ async function loadDetails(instruction) {
     return await detailsPromise;
 }
 
-async function loadAllInstructions() {
+async function loadAllInstructions(withDetails) {
     const base = await loadInstructionList(baseInstructionsUrl);
     const simdfp = await loadInstructionList(simdInstructionsUrl);
     const sve = await loadInstructionList(sveInstructionsUrl);
+    sve.forEach((sveinst) => {
+        sveinst.sve = true;
+    });
 
     const fullList = base.concat(simdfp, sve);
 
-    fs.writeFileSync('InstructionList.json', JSON.stringify(fullList, null, '    '));
+    fs.writeFileSync('InstructionList.json', JSON.stringify(fullList, undefined, ' '));
 
-    const detailsList = [];
+    if (withDetails === true) {
+        const detailsList = [];
 
-    for (const inst of fullList) {
-        console.log('loading details:', inst.instruction);
-        detailsList.push(await loadDetails(inst));
+        for (let i = 0; i < fullList.length; i += 10) {
+            const segment = fullList.slice(i, i + 10);
+            console.log('loading details:', segment.map((inst) => inst.instruction).join(' '));
+            const promises = segment.map((inst) => loadDetails(inst));
+            detailsList.push(...await Promise.all(promises));
+        }
+
+        fs.writeFileSync('InstructionListDetail.json', JSON.stringify(detailsList, undefined, ' '));
     }
-
-    fs.writeFileSync('InstructionListDetail.json', JSON.stringify(detailsList, null, '    '));
 }
 
-loadAllInstructions().then(() => {
+const argFull = process.argv.find((arg) => arg === '--full') !== undefined;
+
+loadAllInstructions(argFull).then(() => {
     console.log('done');
 });

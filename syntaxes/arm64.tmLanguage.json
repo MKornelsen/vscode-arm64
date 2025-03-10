@@ -8,13 +8,17 @@
 			"match": "//.*$"
 		},
 		{
+			"name": "comment.arm64",
+			"match": "^\\s*#.*"
+		},
+		{
 			"name": "comment.block.arm64",
 			"begin": "/\\*",
 			"end": "\\*/"
 		},
 		{
 			"name": "keyword.control.directive.arm64",
-			"match": "^\\s*\\.\\w+\\b(.*)",
+			"match": "\\.\\w+\\b",
 			"captures": {
 				"1": {
 					"patterns": [
@@ -56,7 +60,7 @@
 		},
 		{
 			"name": "constant.other.equalsignliteral.arm64",
-			"match": "=.*"
+			"match": "=.*?(?=//|/\\*|$)"
 		},
 		{
 			"name": "variable.parameter.conditioncode.arm64",
